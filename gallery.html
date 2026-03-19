@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Tattoo Temple Houston</title>
+<meta name="description" content="Portfolio gallery from the artists at Tattoo Temple Houston — sacred geometry, blackwork, fine line, and piercing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--charcoal:#1a1a1a;--gold:#C9A84C;--white:#f5f5f0;--dim:#888;--border:rgba(255,255,255,0.07)}
+body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);-webkit-font-smoothing:antialiased;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:rgba(10,10,10,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);text-decoration:none;}
+.nav-links{display:flex;gap:20px;list-style:none;}
+.nav-links a{font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-toggle{display:none;background:none;border:none;color:var(--white);font-size:1.4rem;cursor:pointer;}
+.page-hero{padding:140px 72px 80px;border-bottom:1px solid var(--border);max-width:1200px;margin:0 auto;}
+.page-label{font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:block;}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5rem);font-weight:300;line-height:1;}
+.gallery-body{max-width:1200px;margin:0 auto;padding:60px 72px 80px;}
+.artist-section{margin-bottom:72px;}
+.artist-label{font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:block;}
+.artist-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--white);margin-bottom:32px;}
+.masonry{columns:3;column-gap:3px;}
+.masonry-item{break-inside:avoid;margin-bottom:3px;overflow:hidden;}
+.masonry-item img{width:100%;display:block;filter:brightness(0.85);transition:filter 0.4s,transform 0.4s;}
+.masonry-item:hover img{filter:brightness(1);transform:scale(1.02);}
+.float-btn{position:fixed;bottom:28px;right:28px;z-index:999;background:var(--gold);color:#0a0a0a;padding:12px 20px;text-decoration:none;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;box-shadow:0 4px 24px rgba(201,168,76,0.35);transition:transform 0.2s;}
+.float-btn:hover{transform:translateY(-2px);}
+footer{border-top:1px solid var(--border);padding:40px 72px;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;}
+.footer-back{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;}
+.footer-back:hover{color:var(--white);}
+@media(max-width:900px){nav{padding:16px 20px;} .nav-links{display:none;} .nav-toggle{display:block;} .page-hero,.gallery-body{padding-left:24px;padding-right:24px;} .masonry{columns:2;} footer{padding:32px 24px;}}
+@media(max-width:480px){.masonry{columns:1;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="./" class="nav-logo">Tattoo Temple Houston</a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  <ul class="nav-links">
+    <li><a href="./">Home</a></li>
+    <li><a href="./artists/">Our Artists</a></li>
+    <li><a href="./gallery.html" class="active">Gallery</a></li>
+    <li><a href="./reviews.html">Reviews</a></li>
+    <li><a href="./booking.html">Book</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <span class="page-label">Portfolio</span>
+  <h1 class="page-title">Gallery</h1>
+</div>
+
+<div class="gallery-body">
+  <div class="artist-section">
+    <span class="artist-label">Sacred Geometry · Geometric</span>
+    <h2 class="artist-title">Raúl Wesche</h2>
+    <div class="masonry">
+      <div class="masonry-item"><img src="./img/wesche_1.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_10.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_11.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_12.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_2.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_3.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_4.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_5.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_6.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_7.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_8.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/wesche_9.jpg" alt="Raúl Wesche work" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="artist-section">
+    <span class="artist-label">Blackwork · Dark Art</span>
+    <h2 class="artist-title">Sailor Doom</h2>
+    <div class="masonry">
+      <div class="masonry-item"><img src="./img/sailordoom_10.jpg" alt="Sailor Doom work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/sailordoom_11.jpg" alt="Sailor Doom work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/sailordoom_12.jpg" alt="Sailor Doom work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/sailordoom_2.jpg" alt="Sailor Doom work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/sailordoom_3.jpg" alt="Sailor Doom work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/sailordoom_4.jpg" alt="Sailor Doom work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/sailordoom_8.jpg" alt="Sailor Doom work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/sailordoom_9.jpg" alt="Sailor Doom work" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="artist-section">
+    <span class="artist-label">Geometric · Dotwork</span>
+    <h2 class="artist-title">Chloe Kristensen</h2>
+    <div class="masonry">
+      <div class="masonry-item"><img src="./img/krisxmoon_1.jpg" alt="Chloe Kristensen work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/krisxmoon_10.jpg" alt="Chloe Kristensen work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/krisxmoon_11.jpg" alt="Chloe Kristensen work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/krisxmoon_12.jpg" alt="Chloe Kristensen work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/krisxmoon_5.jpg" alt="Chloe Kristensen work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/krisxmoon_6.jpg" alt="Chloe Kristensen work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/krisxmoon_7.jpg" alt="Chloe Kristensen work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/krisxmoon_8.jpg" alt="Chloe Kristensen work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/krisxmoon_9.jpg" alt="Chloe Kristensen work" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="artist-section">
+    <span class="artist-label">Piercing · Body Art</span>
+    <h2 class="artist-title">Juju</h2>
+    <div class="masonry">
+      <div class="masonry-item"><img src="./img/juju_1.jpg" alt="Juju work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/juju_2.jpg" alt="Juju work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/juju_3.jpg" alt="Juju work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/juju_4.jpg" alt="Juju work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/juju_5.jpg" alt="Juju work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/juju_6.jpg" alt="Juju work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/juju_7.jpg" alt="Juju work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/juju_8.jpg" alt="Juju work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/juju_new_1.jpg" alt="Juju work" loading="lazy"></div>
+      <div class="masonry-item"><img src="./img/juju_new_2.jpg" alt="Juju work" loading="lazy"></div>
+    </div>
+  </div>
+
+</div>
+
+<a href="./booking.html" class="float-btn">Book Now</a>
+
+<footer>
+  <a href="./" class="footer-back">← Back to Home</a>
+  <a href="./booking.html" style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;text-decoration:none;">Book a Session →</a>
+</footer>
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', () => document.querySelector('.nav-links').classList.toggle('open'));
+</script>
+</body>
+</html>
