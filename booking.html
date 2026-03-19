@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Session — Tattoo Temple Houston</title>
+<meta name="description" content="Book a tattoo session at Tattoo Temple Houston. Choose your artist — Raúl Wesche, Juju, Sailor Doom, or Chloe Kristensen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--charcoal:#1a1a1a;--gold:#C9A84C;--white:#f5f5f0;--dim:#888;--border:rgba(255,255,255,0.07)}
+body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);-webkit-font-smoothing:antialiased;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:rgba(10,10,10,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);text-decoration:none;}
+.nav-links{display:flex;gap:20px;list-style:none;}
+.nav-links a{font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-toggle{display:none;background:none;border:none;color:var(--white);font-size:1.4rem;cursor:pointer;}
+
+.page-hero{padding:140px 72px 80px;border-bottom:1px solid var(--border);max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;}
+.page-label{font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:block;}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5rem);font-weight:300;line-height:1;letter-spacing:-0.02em;}
+.page-intro{max-width:360px;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--dim);line-height:1.8;font-style:italic;}
+
+.booking-body{max-width:1200px;margin:0 auto;padding:80px 72px;display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start;}
+
+/* Info panel */
+.info-panel{position:sticky;top:100px;}
+.info-panel h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--white);margin-bottom:32px;}
+.info-item{margin-bottom:28px;border-left:1px solid var(--gold);padding-left:20px;}
+.info-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.info-value{font-size:0.9rem;color:var(--dim);font-weight:300;line-height:1.6;}
+.info-value a{color:var(--white);text-decoration:none;}
+.note-box{margin-top:40px;padding:20px 24px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);font-size:0.82rem;color:var(--dim);line-height:1.6;}
+.note-box strong{color:var(--gold);font-weight:400;}
+
+/* Form */
+.booking-form{display:flex;flex-direction:column;gap:24px;}
+.form-group{display:flex;flex-direction:column;gap:8px;}
+.form-group label{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);}
+.form-group input,.form-group select,.form-group textarea{
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  padding:14px 16px;color:var(--white);font-family:'Inter',sans-serif;
+  font-size:0.9rem;font-weight:300;outline:none;transition:border-color 0.2s;-webkit-appearance:none;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(201,168,76,0.4);}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(136,136,136,0.5);}
+.form-group select option{background:#1a1a1a;color:#f5f5f0;}
+.form-group textarea{resize:vertical;min-height:120px;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.btn-submit{display:inline-block;padding:16px 40px;border:1px solid var(--gold);color:var(--gold);font-family:'Inter',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;background:none;cursor:pointer;transition:background 0.3s,color 0.3s;align-self:flex-start;}
+.btn-submit:hover{background:var(--gold);color:var(--black);}
+
+/* Artist picker */
+.artist-picker{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;margin-bottom:8px;}
+.artist-option{position:relative;}
+.artist-option input[type="radio"]{position:absolute;opacity:0;width:0;height:0;}
+.artist-option label{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid var(--border);cursor:pointer;transition:all 0.2s;font-size:0.85rem;}
+.artist-option label:hover{border-color:rgba(201,168,76,0.3);}
+.artist-option input:checked + label{border-color:var(--gold);background:rgba(201,168,76,0.08);color:var(--white);}
+.artist-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.artist-name{font-weight:500;font-size:0.85rem;}
+.artist-style{font-size:0.72rem;color:var(--dim);}
+.artist-option input:checked + label .artist-style{color:rgba(201,168,76,0.7);}
+
+footer{border-top:1px solid var(--border);padding:40px 72px;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:0.9rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);}
+.footer-back{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;}
+.footer-back:hover{color:var(--white);}
+
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity 0.7s,transform 0.7s;}
+.fade-up.visible{opacity:1;transform:none;}
+
+@media(max-width:900px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(10,10,10,0.98);padding:20px;gap:16px;border-bottom:1px solid var(--border);z-index:99;}
+  .nav-links.open{display:flex;}
+  .nav-toggle{display:block;}
+  .page-hero{padding:120px 24px 60px;flex-direction:column;gap:24px;align-items:flex-start;}
+  .booking-body{grid-template-columns:1fr;padding:48px 24px;gap:48px;}
+  .info-panel{position:static;}
+  .form-row{grid-template-columns:1fr;}
+  .artist-picker{grid-template-columns:1fr;}
+  footer{padding:32px 24px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="./" class="nav-logo">Tattoo Temple Houston</a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  <ul class="nav-links">
+    <li><a href="./">Home</a></li>
+    <li><a href="./artists/">Our Artists</a></li>
+    <li><a href="./reviews.html">Reviews</a></li>
+    <li><a href="./booking.html" class="active">Book</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div>
+    <span class="page-label">Tattoo Inquiries</span>
+    <h1 class="page-title">Book a<br>Session</h1>
+  </div>
+  <p class="page-intro">Choose your artist and tell us about your vision. We'll be in touch to set up your consultation.</p>
+</div>
+
+<div class="booking-body">
+  <!-- Info -->
+  <div class="info-panel fade-up">
+    <h2>Before you reach out</h2>
+    <div class="info-item">
+      <div class="info-label">Location</div>
+      <div class="info-value">3346 E T C Jester Blvd<br>Houston, TX 77018</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Phone</div>
+      <div class="info-value"><a href="tel:3462930980">(346) 293-0980</a></div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Hours</div>
+      <div class="info-value">Tue–Sat: 12:00 PM – 6:00 PM<br>Mon & Sun: Closed</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Instagram</div>
+      <div class="info-value"><a href="https://instagram.com/tattootemple_houston" target="_blank">@tattootemple_houston</a></div>
+    </div>
+    <div class="note-box">
+      <strong>Individual artist availability varies.</strong> Select your preferred artist below and we'll connect you with them directly to schedule.
+    </div>
+  </div>
+
+  <!-- Form -->
+  <form class="booking-form fade-up" onsubmit="submitBooking(event)">
+    
+    <!-- Artist Picker -->
+    <div class="form-group">
+      <label>Choose Your Artist *</label>
+      <div class="artist-picker">
+        <div class="artist-option">
+          <input type="radio" name="artist" id="artist-raul" value="Raúl Wesche (@weschetattoo)" required>
+          <label for="artist-raul">
+            <img src="./img/wesche_1.jpg" class="artist-avatar" alt="Raúl Wesche">
+            <div><div class="artist-name">Raúl Wesche</div><div class="artist-style">Sacred Geometry · Geometric</div></div>
+          </label>
+        </div>
+        <div class="artist-option">
+          <input type="radio" name="artist" id="artist-juju" value="Juju (@juju.brilliart)">
+          <label for="artist-juju">
+            <img src="./img/juju_new_1.jpg" class="artist-avatar" alt="Juju">
+            <div><div class="artist-name">Juju</div><div class="artist-style">Fine Line · Illustrative</div></div>
+          </label>
+        </div>
+        <div class="artist-option">
+          <input type="radio" name="artist" id="artist-sailor" value="Sailor Doom (@sailor.doom.tattoos)">
+          <label for="artist-sailor">
+            <img src="./img/sailordoom_2.jpg" class="artist-avatar" alt="Sailor Doom">
+            <div><div class="artist-name">Sailor Doom</div><div class="artist-style">Blackwork · Dark Art</div></div>
+          </label>
+        </div>
+        <div class="artist-option">
+          <input type="radio" name="artist" id="artist-chloe" value="Chloe Kristensen (@krisxmoon)">
+          <label for="artist-chloe">
+            <img src="./img/krisxmoon_1.jpg" class="artist-avatar" alt="Chloe Kristensen">
+            <div><div class="artist-name">Chloe Kristensen</div><div class="artist-style">Geometric · Dotwork</div></div>
+          </label>
+        </div>
+        <div class="artist-option" style="grid-column:1/-1;">
+          <input type="radio" name="artist" id="artist-any" value="No preference — best availability">
+          <label for="artist-any">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:1.2rem;">◈</div>
+            <div><div class="artist-name">No preference</div><div class="artist-style">Match me with the best availability</div></div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" id="b-name" placeholder="Full name" required>
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" id="b-email" placeholder="your@email.com" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Phone (Optional)</label>
+        <input type="tel" id="b-phone" placeholder="+1 (000) 000-0000">
+      </div>
+      <div class="form-group">
+        <label>Placement *</label>
+        <input type="text" id="b-placement" placeholder="e.g. Full sleeve, back piece..." required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Describe Your Vision *</label>
+      <textarea id="b-vision" placeholder="Tell us about the piece — style, size, inspiration, any details that matter to you." required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Reference Links (Optional)</label>
+      <input type="text" id="b-refs" placeholder="Instagram posts, Pinterest, Google Drive...">
+    </div>
+
+    <button type="submit" class="btn-submit">Send Inquiry →</button>
+    <p id="b-success" style="display:none;color:var(--gold);font-size:0.88rem;margin-top:-12px;">✓ Your inquiry has been sent. We'll be in touch soon.</p>
+  </form>
+</div>
+
+<footer>
+  <div class="footer-logo">Tattoo Temple Houston</div>
+  <a href="./" class="footer-back">← Back to Home</a>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(e => e.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);} }), {threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+function submitBooking(e) {
+  e.preventDefault();
+  const artist = document.querySelector('input[name="artist"]:checked')?.value || 'No preference';
+  const name = document.getElementById('b-name').value;
+  const email = document.getElementById('b-email').value;
+  const phone = document.getElementById('b-phone').value;
+  const placement = document.getElementById('b-placement').value;
+  const vision = document.getElementById('b-vision').value;
+  const refs = document.getElementById('b-refs').value;
+  
+  const body = `Artist: ${artist}\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nPlacement: ${placement}\n\nVision:\n${vision}\n\nReferences: ${refs}`;
+  const subject = encodeURIComponent(`Booking Inquiry — ${name} → ${artist}`);
+  window.location.href = `mailto:tattootemplehouston@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`;
+  document.getElementById('b-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
