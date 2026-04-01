@@ -225,9 +225,7 @@
 
       <div>
         <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:300;margin-bottom:32px;">Booking Inquiry</h2>
-        <form action="#" method="POST">
-          <input type="hidden" name="_subject" value="Tattoo Booking Inquiry &#x2014; Tattoo Temple Houston">
-          <input type="hidden" name="_captcha" value="false">
+        <form id="bookingForm" onsubmit="return false;">
           <input type="hidden" name="artist" id="selectedArtist" value="Raul Wesche">
           <div class="form-group">
             <label>Name *</label>
@@ -253,7 +251,8 @@
             <label>Reference Links (optional)</label>
             <input type="text" name="references" placeholder="Links to reference images">
           </div>
-          <button type="submit" class="btn-submit">Send Booking Request</button>
+          <button type="submit" class="btn-submit" id="submitBtn">Send Booking Request</button>
+          <div id="formMsg" style="display:none;margin-top:16px;padding:16px;text-align:center;font-size:0.88rem;border-radius:4px;"></div>
         </form>
       </div>
     </div>
@@ -277,6 +276,73 @@
       document.getElementById('selectedArtist').value = name;
       el.querySelector('input').checked = true;
     }
+
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submitBtn');
+      var msg = document.getElementById('formMsg');
+      var form = this;
+
+      var name = form.querySelector('[name="name"]').value.trim();
+      var email = form.querySelector('[name="email"]').value.trim();
+      var phone = form.querySelector('[name="phone"]').value.trim();
+      var artist = document.getElementById('selectedArtist').value;
+      var placement = form.querySelector('[name="placement"]').value.trim();
+      var vision = form.querySelector('[name="vision"]').value.trim();
+      var references = form.querySelector('[name="references"]').value.trim();
+
+      if (!name || !email || !vision) {
+        msg.style.display = 'block';
+        msg.style.background = 'rgba(200,50,50,0.2)';
+        msg.style.color = '#ff6b6b';
+        msg.textContent = 'Please fill in all required fields.';
+        return;
+      }
+
+      var service = 'Artist: ' + artist + ' | Placement: ' + placement;
+      var message = vision;
+      if (references) message += '\n\nReferences: ' + references;
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      msg.style.display = 'none';
+
+      try {
+        var res = await fetch('https://impartial-bear-607.convex.cloud/api/booking/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            slug: 'tattootemplehouston',
+            name: name,
+            email: email,
+            phone: phone || undefined,
+            service: service,
+            message: message
+          })
+        });
+        var data = await res.json();
+        if (res.ok && data.ok) {
+          msg.style.display = 'block';
+          msg.style.background = 'rgba(201,168,76,0.15)';
+          msg.style.color = 'var(--gold)';
+          msg.textContent = 'Booking request sent! We\'ll be in touch soon.';
+          form.reset();
+          document.getElementById('selectedArtist').value = 'Raul Wesche';
+          document.querySelectorAll('.artist-radio-item').forEach(function(i, idx) {
+            i.classList.toggle('selected', idx === 0);
+          });
+        } else {
+          throw new Error(data.error || 'Failed to submit');
+        }
+      } catch (err) {
+        msg.style.display = 'block';
+        msg.style.background = 'rgba(200,50,50,0.2)';
+        msg.style.color = '#ff6b6b';
+        msg.textContent = 'Something went wrong. Please try again or email us directly.';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Send Booking Request';
+    });
   </script>
   
   <script>
