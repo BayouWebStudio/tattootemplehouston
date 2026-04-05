@@ -115,9 +115,24 @@
     .review-text { color: var(--dim); font-size: 0.88rem; line-height: 1.7; margin-bottom: 16px; font-style: italic; }
     .review-author { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); }
     .review-time { font-size: 0.68rem; color: var(--dim); margin-top: 4px; }
-    .leave-review { text-align: center; padding: 48px; border: 1px solid var(--border); }
+    .leave-review { padding: 48px; border: 1px solid var(--border); }
     .leave-review h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2rem; font-weight: 300; margin-bottom: 16px; }
-    .leave-review p { color: var(--dim); margin-bottom: 32px; }
+    .leave-review p { color: var(--dim); margin-bottom: 32px; text-align: center; }
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; background: var(--charcoal); border: 1px solid var(--border); color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 300; padding: 14px 16px; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 140px; }
+    .form-group select option { background: var(--charcoal); color: var(--white); }
+    .btn-submit { width: 100%; background: var(--gold); color: #000; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 18px; font-weight: 500; transition: opacity 0.2s; margin-top: 8px; }
+    .btn-submit:hover { opacity: 0.88; }
+    .star-rating { display: flex; gap: 8px; flex-direction: row-reverse; justify-content: flex-end; }
+    .star-rating input { display: none; }
+    .star-rating label { font-size: 2rem; color: var(--border); cursor: pointer; transition: color 0.2s; line-height: 1; }
+    .star-rating label:hover, .star-rating label:hover ~ label,
+    .star-rating input:checked ~ label { color: var(--gold); }
+    .google-link { text-align: center; margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border); }
+    .google-link p { color: var(--dim); font-size: 0.82rem; margin-bottom: 16px; }
     @media (max-width: 900px) { .page-hero { padding: 120px 24px 48px; } .reviews-body { padding: 60px 24px; } .reviews-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -191,9 +206,34 @@
     </div>
 
     <div class="leave-review fade-up">
-      <h2>Leave a Review</h2>
-      <p>Had a great experience? We'd love to hear from you on Google.</p>
-      <a href="https://search.google.com/local/writereview?placeid=ChIJuRDS_JPHQIYRihYZBMkRjlI" target="_blank" rel="noopener" class="btn-gold">Leave a Google Review</a>
+      <h2 style="text-align:center;">Leave a Review</h2>
+      <p>Had a great experience? Share your feedback below.</p>
+      <form id="reviewForm" onsubmit="return false;" style="max-width:600px;margin:0 auto;">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" name="name" required placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Rating *</label>
+          <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5"><label for="star5">&#x2605;</label>
+            <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#x2605;</label>
+            <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#x2605;</label>
+            <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#x2605;</label>
+            <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#x2605;</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Your Review *</label>
+          <textarea name="reviewText" rows="5" required placeholder="Tell us about your experience..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="reviewSubmitBtn">Submit Review</button>
+        <div id="reviewMsg" style="display:none;margin-top:16px;padding:16px;text-align:center;font-size:0.88rem;border-radius:4px;"></div>
+      </form>
+      <div class="google-link">
+        <p>You can also leave us a review on Google:</p>
+        <a href="https://search.google.com/local/writereview?placeid=ChIJuRDS_JPHQIYRihYZBMkRjlI" target="_blank" rel="noopener" class="btn-outline">Leave a Google Review</a>
+      </div>
     </div>
   </div>
 
@@ -209,6 +249,62 @@
     <div class="footer-copy">&#xa9; 2026 Tattoo Temple Houston</div>
   </footer>
   
+  <script>
+    document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('reviewSubmitBtn');
+      var msg = document.getElementById('reviewMsg');
+      var form = this;
+
+      var name = form.querySelector('[name="name"]').value.trim();
+      var ratingEl = form.querySelector('[name="rating"]:checked');
+      var rating = ratingEl ? parseInt(ratingEl.value) : 0;
+      var body = form.querySelector('[name="reviewText"]').value.trim();
+
+      if (!name || !rating || !body) {
+        msg.style.display = 'block';
+        msg.style.background = 'rgba(200,50,50,0.2)';
+        msg.style.color = '#ff6b6b';
+        msg.textContent = 'Please fill in all fields and select a rating.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      msg.style.display = 'none';
+
+      try {
+        var res = await fetch('https://curious-lemming-262.convex.site/api/testimonials/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            slug: 'tattootemplehouston',
+            name: name,
+            rating: rating,
+            reviewText: body
+          })
+        });
+        var data = await res.json();
+        if (res.ok && data.ok) {
+          msg.style.display = 'block';
+          msg.style.background = 'rgba(201,168,76,0.15)';
+          msg.style.color = 'var(--gold)';
+          msg.textContent = 'Thank you! Your review has been submitted.';
+          form.reset();
+        } else {
+          throw new Error(data.error || 'Failed to submit');
+        }
+      } catch (err) {
+        msg.style.display = 'block';
+        msg.style.background = 'rgba(200,50,50,0.2)';
+        msg.style.color = '#ff6b6b';
+        msg.textContent = 'Something went wrong. Please try again.';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Submit Review';
+    });
+  </script>
+
   <script>
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
